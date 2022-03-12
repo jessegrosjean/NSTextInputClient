@@ -101,13 +101,13 @@ extension TextEditor {
         return glyphRect
     }
 
-    public func characterIndex(for point: NSPoint) -> Int {
+    override func characterIndex(for point: NSPoint) -> UInt {
         let windowPoint = window!.convertFromScreen(NSRect(origin: point, size: NSSize.zero)).origin
         let localPoint = convert(windowPoint, from: nil)
         let glyphIndex = layoutManager.glyphIndex(for: localPoint, in: textContainer)
         let index = layoutManager.characterIndexForGlyph(at: glyphIndex)
         inputLog.print("characterIndex(for: \(point)) -> \(index)")
-        return index
+        return UInt(index)
     }
-
+    
 }
