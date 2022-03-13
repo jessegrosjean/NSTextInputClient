@@ -4,4 +4,4 @@ Progress:
 
 - `NSTextInputClient` - I think working mostly right, but probably not 100% right. Let me know what's wrong and I'll try to fix it.
 
-- `NSTextCheckingClient` - Not working. Right now I'm just trying to get a sequence of insertText with no other actions to do something. So far only callback that ever gets called is `annotatedSubstring`. If you look into the Objective-c base code you'll see lots of `[self doesNotRecognizeSelector:_cmd]`. At this point I'm just trying to see if I can have any of those API called, and find out about it via exception.
+- `NSTextCheckingClient` - Making some progress, but still needs work. Generally trying to implement this in Swift. Seem to be some cases where it's requried to provide an objective-c implementation. For example if I don't implement `setAnnotations:range:` in Objective-c then I get crashes.

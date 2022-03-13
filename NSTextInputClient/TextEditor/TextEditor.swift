@@ -12,6 +12,7 @@ class TextEditor: TextEditorBase {
         didSet {
             if oldValue != selection {
                 coreLog.print("selection = \(selection)")
+                checkingController?.didChangeSelectedRange()
                 needsDisplay = true
             }
         }
@@ -19,7 +20,6 @@ class TextEditor: TextEditorBase {
 
     let textContainer: NSTextContainer
     let layoutManager: NSLayoutManager
-    let backingStore: NSTextStorage
     var checkingController: TextCheckingController?
     
     override init(frame frameRect: NSRect) {
@@ -28,13 +28,13 @@ class TextEditor: TextEditorBase {
     
     required init?(coder: NSCoder) {
         selection = Selection(head: 0)
-        backingStore = NSTextStorage(string: "", attributes: nil)
         layoutManager = NSLayoutManager()
-        backingStore.addLayoutManager(layoutManager)
         textContainer = NSTextContainer(containerSize: NSMakeSize(100, 100))
         layoutManager.addTextContainer(textContainer)
         
         super.init(coder: coder)
+
+        self.backingStore.addLayoutManager(layoutManager)
 
         autocorrectionType = .yes
         spellCheckingType = .yes
@@ -48,9 +48,10 @@ class TextEditor: TextEditorBase {
         textCompletionType = .yes
 
         checkingController = TextCheckingController(client: self)
+        checkingController?.insertedText(in: NSMakeRange(0, 0))
     }
     
-    public func replaceCharacters(in range: NSRange, with string: Any) {
+    public func replaceCharacters(in range: NSRange, with string: Any) -> NSRange {
         coreLog.print("replaceCharacters(in range: \(range), with string: \(string)")
         
         let string = attributedString(anyString: string)
@@ -60,11 +61,14 @@ class TextEditor: TextEditorBase {
         backingStore.beginEditing()
         backingStore.replaceCharacters(in: replacementRange, with: string)
         backingStore.endEditing()
+        checkingController?.didChangeText(in: replacementRange)
 
         selection = Selection(head: NSMaxRange(insertedRange))
         unmarkText()
         inputContext?.invalidateCharacterCoordinates()
         needsDisplay = true
+        
+        return replacementRange
     }
 
     public func deleteCharacters(in range: NSRange) {
@@ -86,9 +90,18 @@ class TextEditor: TextEditorBase {
         }
         
         backingStore.deleteCharacters(in: range)
+        checkingController?.didChangeText(in: range)
         selection = Selection(head: range.location)
         inputContext?.invalidateCharacterCoordinates()
         invalidateIntrinsicContentSize()
         needsDisplay = true
     }
+    
+    func validateSelection() {
+        let max = backingStore.length
+        let head = min(selection.head, max)
+        let anchor = min(selection.anchor, max)
+        selection = Selection(head: head, anchor: anchor)
+    }
+    
 }

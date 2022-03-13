@@ -2,6 +2,13 @@
 
 @implementation TextEditorBase
 
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    if (self = [super initWithCoder:coder]) {
+        _backingStore = [[NSTextStorage alloc] init];
+    }
+    return self;
+}
+
 /* The receiver inserts string replacing the content specified by replacementRange. string can be either an NSString or NSAttributedString instance.
  */
 - (void)insertText:(id)string replacementRange:(NSRange)replacementRange {
@@ -57,7 +64,6 @@
 /* Returns an array of attribute names recognized by the receiver.
  */
 - (NSArray<NSAttributedStringKey> *)validAttributesForMarkedText {
-    [self doesNotRecognizeSelector:_cmd];
     return [NSArray array];
 }
 
@@ -83,7 +89,7 @@
 
 /* Returns annotated string specified by range. The range should be adjusted according to the standard range adjustment policy, and in addition for this method alone it should be adjusted to begin and end on paragraph boundaries (with possible exceptions for paragraphs exceeding some maximum length). If the range lies within the bounds of the document but is of zero length, it should be adjusted to include the enclosing paragraph. This method should return nil if none of the range lies within the bounds of the document, but if only a zero-length portion of the adjusted range lies within the bounds of the document, as may happen with an empty document or at the end of the document, then an empty attributed string should be returned rather than nil. If the return value is non-nil and actualRange is non-NULL, then actualRange returns the actual adjusted range used.
  */
-- (nullable NSAttributedString *)annotatedSubstringForProposedRange:(NSRange)range actualRange:(nullable NSRangePointer)actualRange  {
+- (nullable NSAttributedString *)annotatedSubstringForProposedRange:(NSRange)range actualRange:(nullable NSRangePointer)actualRange {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
@@ -91,7 +97,13 @@
 /* The receiver replaces any existing annotations on the specified range with the provided annotations. The range should be adjusted according to the standard range adjustment policy. Has no effect if the adjusted range has zero length.
  */
 - (void)setAnnotations:(NSDictionary<NSAttributedStringKey, NSString *> *)annotations range:(NSRange)range {
-    [self doesNotRecognizeSelector:_cmd];
+    NSRange validRange = [self validateTextCheckingRange:range];
+    
+    if (validRange.location == NSNotFound) {
+        return;
+    }
+    
+    [self.backingStore setAttributes:annotations range:validRange];
 }
 
 /* The receiver adds the specified annotation to the specified range. The range should be adjusted according to the standard range adjustment policy. Has no effect if the adjusted range has zero length.
@@ -128,8 +140,26 @@
 /* Returns the appropriate candidate list touch bar item for displaying touch bar candidates, if any.
  */
 - (nullable NSCandidateListTouchBarItem *)candidateListTouchBarItem {
-    [self doesNotRecognizeSelector:_cmd];
     return nil;
+}
+
+- (NSRange)validateTextCheckingRange:(NSRange)range {
+    NSRange documentRange = NSMakeRange(0, self.backingStore.length);
+    
+    if (range.location == NSNotFound) {
+        range = documentRange;
+    }
+    
+    if (range.location > documentRange.length) {
+        return NSMakeRange(NSNotFound, 0);
+    }
+    
+    NSInteger maxRange = NSMaxRange(range);
+    if (maxRange > documentRange.length) {
+        range.length = documentRange.length - range.location;
+    }
+    
+    return range;
 }
 
 @end

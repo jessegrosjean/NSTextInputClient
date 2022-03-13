@@ -5,16 +5,12 @@ struct Selection: Equatable {
     var head: Int
     var anchor: Int
     var affinity: NSSelectionAffinity
-    var granularity: NSSelectionGranularity
     var markedRange: NSRange?
-    var stillSelecting: Bool
     
-    init(head: Int, anchor: Int? = nil, affinity: NSSelectionAffinity? = nil, granularity: NSSelectionGranularity? = nil, stillSelecting: Bool? = nil) {
+    init(head: Int, anchor: Int? = nil, affinity: NSSelectionAffinity? = nil) {
         self.head = head
         self.anchor = anchor ?? head
         self.affinity = affinity ?? .downstream
-        self.granularity = granularity ?? .selectByCharacter
-        self.stillSelecting = stillSelecting ?? false
     }
     
     var isCollapsed: Bool {

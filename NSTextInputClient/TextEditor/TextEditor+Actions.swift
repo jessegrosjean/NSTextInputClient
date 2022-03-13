@@ -37,7 +37,7 @@ extension TextEditor {
     override func insertNewline(_ sender: Any?) {
         insertText("\n")
     }
-     
+    
     override func insertText(_ insertString: Any) {
         insertText(insertString, replacementRange: NSMakeRange(NSNotFound, 0))
     }

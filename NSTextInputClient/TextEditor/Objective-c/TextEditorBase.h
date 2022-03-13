@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSTextInputTraitType linkDetectionType;
 @property NSTextInputTraitType textCompletionType;
 
+@property NSTextStorage *backingStore;
+
 - (NSUInteger)characterIndexForPoint:(NSPoint)point;
+- (NSRange)validateTextCheckingRange:(NSRange)range;
 
 @end
 

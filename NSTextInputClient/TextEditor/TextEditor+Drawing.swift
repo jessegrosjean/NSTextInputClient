@@ -18,6 +18,7 @@ extension TextEditor {
         drawMarked(for: characterRange)
         drawSelection(for: characterRange)
         layoutManager.drawGlyphs(forGlyphRange: glyphRange, at: origin)
+        
         drawCaret(forGlyphRange: glyphRange)
     }
 

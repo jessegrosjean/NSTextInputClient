@@ -5,16 +5,12 @@ extension TextEditor {
     override func insertText(_ string: Any, replacementRange: NSRange) {
         inputLog.print("insertText(\(string), replacementRange: \(replacementRange)")
         
-        replaceCharacters(in: replacementRange, with: string)
-        
         let string = attributedString(anyString: string)
+        let replacementRange = replaceCharacters(in: replacementRange, with: string)
         let range = NSRange(location: replacementRange.location, length: string.length)
-        let documentRange = NSRange(location: 0, length: backingStore.length)
         
-        checkingController?.didChangeText(in: documentRange)
-        checkingController?.didChangeSelectedRange()
         checkingController?.insertedText(in: range)
-        checkingController?.checkText(in: documentRange, types: NSTextCheckingAllTypes, options: [:])
+        checkingController?.considerTextChecking(for: NSMakeRange(0, backingStore.length))
     }
     
     override func setMarkedText(_ string: Any, selectedRange: NSRange, replacementRange: NSRange) {
