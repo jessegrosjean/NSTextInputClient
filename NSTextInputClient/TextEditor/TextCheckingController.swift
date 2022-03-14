@@ -1,6 +1,6 @@
 import OSLog
 
-let checkingControllerLog = OSLog(subsystem: "com.hogbaysoftware.TextCheckingController", category: "checkingController").enabled(true)
+let checkingControllerLog = OSLog(subsystem: "com.hogbaysoftware.TextCheckingController", category: "checkingController").enabled(false)
 
 class TextCheckingController: NSTextCheckingController {
     

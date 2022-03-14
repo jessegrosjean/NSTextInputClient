@@ -705,17 +705,52 @@
         <scene sceneID="BXC-Ur-YBG">
             <objects>
                 <viewController id="b3J-eb-vvD" customClass="ViewController" customModule="NSTextInputClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="dlN-ic-BLn">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="652"/>
+                    <view key="view" misplaced="YES" id="dlN-ic-BLn">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gca-KP-ZyA">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="652"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="718"/>
                                 <subviews>
                                     <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxv-6U-ek4" customClass="TextEditor" customModule="NSTextInputClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="317" width="450" height="335"/>
+                                        <rect key="frame" x="0.0" y="618" width="450" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="KfS-w2-ogI"/>
+                                        </constraints>
                                     </customView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ams-tt-R0V">
+                                        <rect key="frame" x="0.0" y="615" width="96" height="5"/>
+                                    </box>
+                                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vge-I4-6gV">
+                                        <rect key="frame" x="0.0" y="317" width="450" height="300"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="GYm-Me-Frq">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Ffl-Bp-WSa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <size key="minSize" width="450" height="300"/>
+                                                    <size key="maxSize" width="450" height="10000000"/>
+                                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                </textView>
+                                            </subviews>
+                                        </clipView>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="1t6-Uk-ucn"/>
+                                        </constraints>
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="zzu-zO-soC">
+                                            <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="aKE-9K-6HG">
+                                            <rect key="frame" x="434" y="0.0" width="16" height="300"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="HRJ-uA-yfn">
                                         <rect key="frame" x="0.0" y="314" width="96" height="5"/>
                                     </box>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r3d-yu-cc4">
@@ -865,8 +900,12 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -880,6 +919,10 @@
                             <constraint firstItem="gca-KP-ZyA" firstAttribute="top" secondItem="dlN-ic-BLn" secondAttribute="top" id="uBJ-JB-iCB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="debugTextView" destination="Ffl-Bp-WSa" id="RLo-yy-QLl"/>
+                        <outlet property="textEditor" destination="oxv-6U-ek4" id="tq1-lb-KCH"/>
+                    </connections>
                 </viewController>
                 <customObject id="iwG-Y5-mDo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -3,7 +3,7 @@ import OSLog
 
 let coreLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "core").enabled(false)
 let inputLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "input").enabled(false)
-let checkingClientLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checkingClient").enabled(true)
+let checkingClientLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checkingClient").enabled(false)
 
 class TextEditor: TextEditorBase {
     
