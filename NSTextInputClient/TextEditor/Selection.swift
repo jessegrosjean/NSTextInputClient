@@ -39,5 +39,10 @@ struct Selection: Equatable {
         }
         return proposed
     }
+    
+    mutating func offset(by delta: Int) {
+        head += delta
+        anchor += delta
+    }
 
 }

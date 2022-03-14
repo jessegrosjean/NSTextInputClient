@@ -7,10 +7,10 @@ extension TextEditor {
         
         let string = attributedString(anyString: string)
         let replacementRange = replaceCharacters(in: replacementRange, with: string)
-        let range = NSRange(location: replacementRange.location, length: string.length)
+        let insertedRange = NSRange(location: replacementRange.location, length: string.length)
         
-        checkingController?.insertedText(in: range)
-        checkingController?.considerTextChecking(for: NSMakeRange(0, backingStore.length))
+        checkingController?.insertedText(in: insertedRange)
+        checkingController?.considerTextChecking(for: insertedRange)
     }
     
     override func setMarkedText(_ string: Any, selectedRange: NSRange, replacementRange: NSRange) {
@@ -44,7 +44,6 @@ extension TextEditor {
             return NSAttributedString(string: s)
         } else {
             return NSAttributedString(string: (anyString as! NSAttributedString).string)
-            //return anyString as! NSAttributedString
         }
     }
     
@@ -83,7 +82,8 @@ extension TextEditor {
     }
     
     override func validAttributesForMarkedText() -> [NSAttributedString.Key] {
-        []
+        // this is what NSTextView returns... not sure its right for this example though
+        [.underlineStyle, .underlineColor, .backgroundColor, .foregroundColor, .markedClauseSegment, .languageIdentifier, .replacementIndex, .glyphInfo, .textAlternatives, .attachment]
     }
     
     override public func firstRect(forCharacterRange range: NSRange, actualRange: NSRangePointer?) -> NSRect {

@@ -3,9 +3,8 @@ import OSLog
 
 let coreLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "core").enabled(false)
 let inputLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "input").enabled(false)
-let checkingLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checking").enabled(false)
+let checkingClientLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checkingClient").enabled(true)
 
-// The selection must be entirely within the marked text.
 class TextEditor: TextEditorBase {
     
     var selection: Selection {
@@ -61,7 +60,7 @@ class TextEditor: TextEditorBase {
         backingStore.beginEditing()
         backingStore.replaceCharacters(in: replacementRange, with: string)
         backingStore.endEditing()
-        checkingController?.didChangeText(in: replacementRange)
+        checkingController?.didChangeText(in: insertedRange)
 
         selection = Selection(head: NSMaxRange(insertedRange))
         unmarkText()
@@ -90,18 +89,11 @@ class TextEditor: TextEditorBase {
         }
         
         backingStore.deleteCharacters(in: range)
-        checkingController?.didChangeText(in: range)
+        checkingController?.didChangeText(in: NSMakeRange(range.location, 0))
         selection = Selection(head: range.location)
         inputContext?.invalidateCharacterCoordinates()
         invalidateIntrinsicContentSize()
         needsDisplay = true
     }
-    
-    func validateSelection() {
-        let max = backingStore.length
-        let head = min(selection.head, max)
-        let anchor = min(selection.anchor, max)
-        selection = Selection(head: head, anchor: anchor)
-    }
-    
+        
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -695,7 +694,7 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="b3J-eb-vvD" kind="relationship" relationship="window.shadowedContentViewController" id="LGT-A2-am6"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -703,17 +702,188 @@
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <scene sceneID="BXC-Ur-YBG">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="NSTextInputClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl" customClass="TextEditor" customModule="NSTextInputClient" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <viewController id="b3J-eb-vvD" customClass="ViewController" customModule="NSTextInputClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="dlN-ic-BLn">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="652"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gca-KP-ZyA">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="652"/>
+                                <subviews>
+                                    <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxv-6U-ek4" customClass="TextEditor" customModule="NSTextInputClient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="317" width="450" height="335"/>
+                                    </customView>
+                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ams-tt-R0V">
+                                        <rect key="frame" x="0.0" y="314" width="96" height="5"/>
+                                    </box>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r3d-yu-cc4">
+                                        <rect key="frame" x="0.0" y="0.0" width="252" height="316"/>
+                                        <subviews>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g9I-e4-4M2">
+                                                <rect key="frame" x="6" y="291" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="autocorrectionType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="EYH-gL-DT1">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleAutocorrectionType:" target="oxv-6U-ek4" id="Vft-eD-uGe"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zsi-BP-af1">
+                                                <rect key="frame" x="6" y="263" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="spellCheckingType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="xhB-8T-I8C">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleSpellCheckingType:" target="oxv-6U-ek4" id="xki-vU-lFh"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M3D-Xx-k2l">
+                                                <rect key="frame" x="6" y="235" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="grammarCheckingType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="rP3-Qd-ILn">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleGrammarCheckingType:" target="oxv-6U-ek4" id="hXf-rx-Dky"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DGE-km-m3D">
+                                                <rect key="frame" x="6" y="207" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="smartQuotesType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="lSt-eW-twT">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleSmartQuotesType:" target="oxv-6U-ek4" id="tbk-G1-2NH"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vPt-jd-C17">
+                                                <rect key="frame" x="6" y="179" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="smartDashesType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="j44-ug-GP6">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleSmartDashesType:" target="oxv-6U-ek4" id="cdv-2F-Hun"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tgK-Vh-Ji1">
+                                                <rect key="frame" x="6" y="151" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="smartInsertDeleteType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="kuf-54-I7z">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleSmartInsertDeleteType:" target="oxv-6U-ek4" id="JA4-8s-GOB"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5PQ-At-WxA">
+                                                <rect key="frame" x="6" y="123" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="textReplacementType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="T78-6I-JtV">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleTextReplacementType:" target="oxv-6U-ek4" id="eYF-3j-wAb"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6K7-sG-OIX">
+                                                <rect key="frame" x="6" y="95" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="dataDetectionType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="7QG-cA-bt3">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleDataDetectionType:" target="oxv-6U-ek4" id="cOu-5d-fhe"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zHJ-Dj-haz">
+                                                <rect key="frame" x="6" y="67" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="linkDetectionType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="b8f-h3-1ay">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleLinkDetectionType:" target="oxv-6U-ek4" id="b9x-LN-jvx"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oF1-73-bVa">
+                                                <rect key="frame" x="6" y="39" width="238" height="18"/>
+                                                <buttonCell key="cell" type="check" title="textCompletionType" bezelStyle="regularSquare" imagePosition="left" state="on" allowsMixedState="YES" inset="2" id="FE1-gJ-QcB">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="toggleTextCompletionType:" target="oxv-6U-ek4" id="me7-oA-BWR"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nb0-rO-FBS">
+                                                <rect key="frame" x="1" y="1" width="250" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Consider checking entire document" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aKV-b7-BJ7">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="considerTextCheckingEntireDocument:" target="oxv-6U-ek4" id="xkn-gt-Ylz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <edgeInsets key="edgeInsets" left="8" right="8" top="8" bottom="8"/>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gca-KP-ZyA" secondAttribute="trailing" id="1U8-ac-bBb"/>
+                            <constraint firstItem="gca-KP-ZyA" firstAttribute="leading" secondItem="dlN-ic-BLn" secondAttribute="leading" id="egr-K3-7FQ"/>
+                            <constraint firstAttribute="bottom" secondItem="gca-KP-ZyA" secondAttribute="bottom" id="qT6-6b-6BT"/>
+                            <constraint firstItem="gca-KP-ZyA" firstAttribute="top" secondItem="dlN-ic-BLn" secondAttribute="top" id="uBJ-JB-iCB"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="iwG-Y5-mDo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="74" y="912"/>
         </scene>
     </scenes>
 </document>

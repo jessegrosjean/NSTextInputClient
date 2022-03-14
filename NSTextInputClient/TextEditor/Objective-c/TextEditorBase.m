@@ -102,7 +102,7 @@
     if (validRange.location == NSNotFound) {
         return;
     }
-    
+    NSLog(@"setAnnotations(%@)", annotations);
     [self.backingStore setAttributes:annotations range:validRange];
 }
 

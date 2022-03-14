@@ -8,7 +8,7 @@ extension TextEditor {
         let paragraphRange = (backingStore.string as NSString).paragraphRange(for: range)
         let result = backingStore.attributedSubstring(from: paragraphRange)
         actualRange?.pointee = paragraphRange
-        checkingLog.print("annotatedSubstring(forProposedRange range: \(range), actualRange: \(String(describing: actualRange)) -> \(result)")
+        checkingClientLog.print("annotatedSubstring(forProposedRange range: \(range), actualRange: \(String(describing: actualRange)) -> \(result)")
         return result
     }
 
@@ -17,21 +17,24 @@ extension TextEditor {
             return
         }
         backingStore.addAttributes(annotations, range: range)
+        checkingClientLog.print("addAnnotations(\(annotations) range: \(range)")
         needsDisplay = true
     }
 
-    //override func setAnnotations(_ annotations: [NSAttributedString.Key : String], range: NSRange) {
+    // Crash if override this method, using implementation in TextEditorBase instead
+    // override func setAnnotations(_ annotations: [NSAttributedString.Key : String], range: NSRange) {
     //    guard let range = textCheckingAdjusted(range: range) else {
     //        return
     //    }
     //    backingStore.setAttributes(annotations, range: range)
-    //}
+    // }
     
     override func removeAnnotation(_ annotationName: NSAttributedString.Key, range: NSRange) {
         guard let range = textCheckingAdjusted(range: range) else {
             return
         }
         backingStore.removeAttribute(annotationName, range: range)
+        checkingClientLog.print("removeAnnotation(\(annotationName) range: \(range)")
         needsDisplay = true
     }
     
@@ -41,12 +44,17 @@ extension TextEditor {
         }
         
         backingStore.replaceCharacters(in: range, with: annotatedString)
-        validateSelection()
+        checkingClientLog.print("replaceCharacters(in: \(range), withAnnotatedString: \(annotatedString)")
+        selection.offset(by: annotatedString.length - range.length)
         needsDisplay = true
     }
 
     override func selectAndShow(_ range: NSRange) {
-        fatalError()
+        checkingClientLog.print("selectAndShow(\(range)")
+        guard let range = textCheckingAdjusted(range: range) else {
+            return
+        }
+        selection = .init(head: NSMaxRange(range), anchor: range.location)
     }
     
     override func view(for range: NSRange, firstRect: NSRectPointer?, actualRange: NSRangePointer?) -> NSView? {
@@ -72,54 +80,5 @@ extension TextEditor {
             return range
         }
     }
-    
-    /*
-    
-    
-    @objc override func setAnnotations(_ annotations: [NSAttributedString.Key : String], range: NSRange) {
-        guard let range = textCheckingAdjusted(range: range) else {
-            return
-        }
-        backingStore.setAttributes(annotations, range: range)
-    }
-    
-    override func removeAnnotation(_ annotationName: NSAttributedString.Key, range: NSRange) {
-        guard let range = textCheckingAdjusted(range: range) else {
-            return
-        }
-        backingStore.removeAttribute(annotationName, range: range)
-    }
         
-    override func candidateListTouchBarItem() -> NSCandidateListTouchBarItem<AnyObject>? {
-        return nil
-    }
-    
-    private func textCheckingAdjusted(range: NSRange) -> NSRange? {
-        var range = range
-        if range.location == NSNotFound {
-            checkingLog.print("notFoundRange, replacing with document range: \(range)")
-            range = NSRange(location: 0, length: backingStore.length)
-        }
-        
-        if range.location > backingStore.length {
-            checkingLog.print("invalidRange: \(range)")
-            return nil
-        }
-        
-        let rangeEnd = range.location + range.length
-        if rangeEnd > backingStore.length {
-            checkingLog.print("clippedRange: \(range)")
-            range.length = backingStore.length - range.location
-        }
-        
-        return range
-    }*/
-    
 }
-
-/*
-- (void)setAnnotations:(NSDictionary<NSAttributedStringKey, NSString *> *)annotations range:(NSRange)range {
-- (void)addAnnotations:(NSDictionary<NSAttributedStringKey, NSString *> *)annotations range:(NSRange)range {
-- (void)removeAnnotation:(NSAttributedStringKey)annotationName range:(NSRange)range {
-- (NSRange)validateTextCheckingRange:(NSRange)range {
-*/

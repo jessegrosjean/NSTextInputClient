@@ -24,7 +24,7 @@ extension TextEditor {
 
     func drawMarked(for visibleCharacterRange: NSRange) {
         if let marked = selection.markedRange {
-            NSColor.red.set()
+            //NSColor.red.set()
             for each in rangeRects(marked, constrainedRange: visibleCharacterRange) {
                 NSBezierPath(rect: each).fill()
             }
