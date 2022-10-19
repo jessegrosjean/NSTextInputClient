@@ -1,9 +1,9 @@
 import AppKit
 import OSLog
 
-let coreLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "core").enabled(false)
-let inputLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "input").enabled(false)
-let checkingClientLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checkingClient").enabled(false)
+let coreLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "core").enabled(true)
+let inputLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "input").enabled(true)
+let checkingClientLog = OSLog(subsystem: "com.hogbaysoftware.TextEditor", category: "checkingClient").enabled(true)
 
 class TextEditor: TextEditorBase {
     

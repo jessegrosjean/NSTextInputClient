@@ -6,9 +6,12 @@ extension TextEditor {
         }
         
         let paragraphRange = (backingStore.string as NSString).paragraphRange(for: range)
-        let result = backingStore.attributedSubstring(from: paragraphRange)
+        let result = backingStore.attributedSubstring(from: paragraphRange).mutableCopy() as! NSMutableAttributedString
         actualRange?.pointee = paragraphRange
         checkingClientLog.print("annotatedSubstring(forProposedRange range: \(range), actualRange: \(String(describing: actualRange)) -> \(result)")
+        
+        result.removeAttribute(.font, range: .init(location: 0, length: result.length))
+        
         return result
     }
 
@@ -21,14 +24,14 @@ extension TextEditor {
         needsDisplay = true
     }
 
-    // Crash if override this method, using implementation in TextEditorBase instead
-    // override func setAnnotations(_ annotations: [NSAttributedString.Key : String], range: NSRange) {
-    //    guard let range = textCheckingAdjusted(range: range) else {
-    //        return
-    //    }
-    //    backingStore.setAttributes(annotations, range: range)
-    // }
-    
+    override func setAnnotations(_ annotations: [NSAttributedString.Key : String], range: NSRange) {
+        guard let range = textCheckingAdjusted(range: range) else {
+            return
+        }
+        checkingClientLog.print("setAnnotations(\(annotations) range: \(range)")
+        backingStore.setAttributes(annotations, range: range)
+    }
+
     override func removeAnnotation(_ annotationName: NSAttributedString.Key, range: NSRange) {
         guard let range = textCheckingAdjusted(range: range) else {
             return
@@ -73,12 +76,32 @@ extension TextEditor {
     }
         
     func textCheckingAdjusted(range: NSRange) -> NSRange? {
-        let range = validateTextChecking(range)
+        let range = validateTextCheckingRange(from: range)
         if range.location == NSNotFound {
             return nil
         } else {
             return range
         }
     }
+
+    func validateTextCheckingRange(from range: NSRange) -> NSRange {
+        let documentRange = NSRange(location: 0, length: backingStore.length)
+        var range = range
         
+        if (range.location == NSNotFound) {
+            range = documentRange
+        }
+
+        if range.location > documentRange.length {
+            return .init(location: NSNotFound, length: 0);
+        }
+
+        let maxRange = NSMaxRange(range)
+        if (maxRange > documentRange.length) {
+            range.length = documentRange.length - range.location
+        }
+
+        return range
+    }
+
 }

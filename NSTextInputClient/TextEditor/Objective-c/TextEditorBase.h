@@ -17,9 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSTextStorage *backingStore;
 
-- (NSUInteger)characterIndexForPoint:(NSPoint)point;
-- (NSRange)validateTextCheckingRange:(NSRange)range;
-
 @end
 
 NS_ASSUME_NONNULL_END

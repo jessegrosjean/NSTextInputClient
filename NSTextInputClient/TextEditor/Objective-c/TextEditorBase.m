@@ -1,4 +1,5 @@
 #import "TextEditorBase.h"
+#import "NSTextInputClient-Swift.h"
 
 @implementation TextEditorBase
 
@@ -97,13 +98,7 @@
 /* The receiver replaces any existing annotations on the specified range with the provided annotations. The range should be adjusted according to the standard range adjustment policy. Has no effect if the adjusted range has zero length.
  */
 - (void)setAnnotations:(NSDictionary<NSAttributedStringKey, NSString *> *)annotations range:(NSRange)range {
-    NSRange validRange = [self validateTextCheckingRange:range];
-    
-    if (validRange.location == NSNotFound) {
-        return;
-    }
-    NSLog(@"setAnnotations(%@)", annotations);
-    [self.backingStore setAttributes:annotations range:validRange];
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 /* The receiver adds the specified annotation to the specified range. The range should be adjusted according to the standard range adjustment policy. Has no effect if the adjusted range has zero length.
@@ -141,25 +136,6 @@
  */
 - (nullable NSCandidateListTouchBarItem *)candidateListTouchBarItem {
     return nil;
-}
-
-- (NSRange)validateTextCheckingRange:(NSRange)range {
-    NSRange documentRange = NSMakeRange(0, self.backingStore.length);
-    
-    if (range.location == NSNotFound) {
-        range = documentRange;
-    }
-    
-    if (range.location > documentRange.length) {
-        return NSMakeRange(NSNotFound, 0);
-    }
-    
-    NSInteger maxRange = NSMaxRange(range);
-    if (maxRange > documentRange.length) {
-        range.length = documentRange.length - range.location;
-    }
-    
-    return range;
 }
 
 @end
