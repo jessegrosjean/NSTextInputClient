@@ -19,8 +19,9 @@ class TextEditor: TextEditorBase {
 
     let textContainer: NSTextContainer
     let layoutManager: NSLayoutManager
-    var checkingController: TextCheckingController?
-    
+    let backingStore: NSTextStorage
+    var checkingController: TextCheckingController!
+
     override init(frame frameRect: NSRect) {
         fatalError()
     }
@@ -30,6 +31,7 @@ class TextEditor: TextEditorBase {
         layoutManager = NSLayoutManager()
         textContainer = NSTextContainer(containerSize: NSMakeSize(100, 100))
         layoutManager.addTextContainer(textContainer)
+        backingStore = NSTextStorage()
         
         super.init(coder: coder)
 
@@ -47,7 +49,7 @@ class TextEditor: TextEditorBase {
         textCompletionType = .yes
 
         checkingController = TextCheckingController(client: self)
-        checkingController?.insertedText(in: NSMakeRange(0, 0))
+        checkingController.insertedText(in: NSMakeRange(0, 0))
     }
     
     public func replaceCharacters(in range: NSRange, with string: Any) -> NSRange {

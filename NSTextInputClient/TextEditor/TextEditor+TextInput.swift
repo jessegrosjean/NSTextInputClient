@@ -40,10 +40,12 @@ extension TextEditor {
     }
     
     func attributedString(anyString: Any) -> NSAttributedString {
-        if let s = anyString as? String {
-            return NSAttributedString(string: s)
+        if let attributedString = anyString as? NSAttributedString {
+            return attributedString
+        } else if let string = anyString as? String {
+            return NSAttributedString(string: string)
         } else {
-            return NSAttributedString(string: (anyString as! NSAttributedString).string)
+            fatalError()
         }
     }
     
@@ -83,9 +85,13 @@ extension TextEditor {
     
     override func validAttributesForMarkedText() -> [NSAttributedString.Key] {
         // this is what NSTextView returns... not sure its right for this example though
-        [.underlineStyle, .underlineColor, .backgroundColor, .foregroundColor, .markedClauseSegment, .languageIdentifier, .replacementIndex, .glyphInfo, .textAlternatives, .attachment]
+        //[.underlineStyle, .underlineColor, .backgroundColor, .foregroundColor, .markedClauseSegment, .languageIdentifier, .replacementIndex, .glyphInfo, .textAlternatives, .attachment]
+        //["NSTextInputReplacementRangeAttributeName", "NSTextInsertionUndoable"]
+        
+        return [.font, .underlineStyle, .foregroundColor, .backgroundColor, .underlineColor, .markedClauseSegment, .languageIdentifier, .replacementIndex, .glyphInfo, .textAlternatives, .attachment]
+
     }
-    
+        
     override public func firstRect(forCharacterRange range: NSRange, actualRange: NSRangePointer?) -> NSRect {
         let glyphRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: actualRange)
         var glyphRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)

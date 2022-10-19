@@ -26,6 +26,7 @@
 		4340F06D27DCDF88001016DE /* TextEditor+TextChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4340F06C27DCDF88001016DE /* TextEditor+TextChecking.swift */; };
 		4340F06F27DCE672001016DE /* TextCheckingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4340F06E27DCE672001016DE /* TextCheckingController.swift */; };
 		4340F07427DCF43B001016DE /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4340F07327DCF43B001016DE /* Logs.swift */; };
+		43A604542900526C005D9775 /* TextEditorBase+TextCheckingClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A604532900526C005D9775 /* TextEditorBase+TextCheckingClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		4340F06E27DCE672001016DE /* TextCheckingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCheckingController.swift; sourceTree = "<group>"; };
 		4340F07127DCF286001016DE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4340F07327DCF43B001016DE /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
+		43A604522900526C005D9775 /* TextEditorBase+TextCheckingClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TextEditorBase+TextCheckingClient.h"; sourceTree = "<group>"; };
+		43A604532900526C005D9775 /* TextEditorBase+TextCheckingClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TextEditorBase+TextCheckingClient.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,8 @@
 				4340F07127DCF286001016DE /* README.md */,
 				4340F06927DCDD6B001016DE /* TextEditorBase.h */,
 				4340F06A27DCDD6B001016DE /* TextEditorBase.m */,
+				43A604522900526C005D9775 /* TextEditorBase+TextCheckingClient.h */,
+				43A604532900526C005D9775 /* TextEditorBase+TextCheckingClient.m */,
 			);
 			path = "Objective-c";
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				431B765B2710900600476924 /* TextEditor+Drawing.swift in Sources */,
 				4340F06F27DCE672001016DE /* TextCheckingController.swift in Sources */,
 				4340F06B27DCDD6B001016DE /* TextEditorBase.m in Sources */,
+				43A604542900526C005D9775 /* TextEditorBase+TextCheckingClient.m in Sources */,
 				4340F06D27DCDF88001016DE /* TextEditor+TextChecking.swift in Sources */,
 				431B765527108BD000476924 /* Selection.swift in Sources */,
 				431B762A27107D1800476924 /* ViewController.swift in Sources */,

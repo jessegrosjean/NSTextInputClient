@@ -2,7 +2,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TextEditorBase : NSView <NSTextCheckingClient>
+@interface TextEditorBase : NSView
+
+#pragma mark - NSTextInputTraits
 
 @property NSTextInputTraitType autocorrectionType;
 @property NSTextInputTraitType spellCheckingType;
@@ -14,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSTextInputTraitType dataDetectionType;
 @property NSTextInputTraitType linkDetectionType;
 @property NSTextInputTraitType textCompletionType;
-
-@property NSTextStorage *backingStore;
 
 @end
 
